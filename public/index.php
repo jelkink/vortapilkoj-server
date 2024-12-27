@@ -1,21 +1,26 @@
 <?php
-require_once '../library/database.php';
+$path_to_library = "../library/";
+
+require_once($path_to_library . "classes/class.database.inc.php");
+require_once($path_to_library . "classes/class.wordlist.inc.php");
 
 $db = new Database();
 $db->Connect();
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['command']) && $_GET['command'] === 'LIST' && isset($_GET['name'])) {
-  $listName = $_GET['name'];
-  // Here you would normally fetch the list from a database or another source
-  // For demonstration purposes, we'll return a static list
-  $list = [
-    'name' => $listName,
-    'items' => ['item1', 'item2', 'item3']
-  ];
+$wl = new WordList($db);
 
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['command']) && $_GET['command'] === 'LIST_NAMES') {
   $response = [
     'status' => 'success',
-    'data' => $list
+    'message' => $wl->get_all_list_names()
+  ];
+} elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['command']) && $_GET['command'] === 'LIST' && isset($_GET['name'])) {
+
+  $listName = $_GET['name'];
+  $wl->read_list($listName);
+  $response = [
+    'status' => 'success',
+    'message' => $wl->get_list();
   ];
 } else {
   $response = [
