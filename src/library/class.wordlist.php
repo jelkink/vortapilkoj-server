@@ -9,11 +9,7 @@ class WordList {
   }
 
   public function read_list($listname) {
-    $query = "SELECT word FROM wordlists WHERE listname = ?";
-    $stmt = $this->db->prepare($query);
-    $stmt->bind_param("s", $listname);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $result = $this->db->query("SELECT word FROM wordlists WHERE listname = " . $listname);
     while ($row = $result->fetch_assoc()) {
       $this->words[] = $row['word'];
     }
@@ -24,10 +20,7 @@ class WordList {
   }
 
   public function get_all_list_names() {
-    $query = "SELECT DISTINCT listname FROM wordlists";
-    $stmt = $this->db->prepare($query);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $result = $this->db->query("SELECT DISTINCT listname FROM wordlists");
     $listnames = [];
     while ($row = $result->fetch_assoc()) {
       $listnames[] = $row['listname'];
