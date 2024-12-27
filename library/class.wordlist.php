@@ -1,6 +1,4 @@
 <?php
-require_once '../library/database.php';
-
 class WordList {
   private $db;
   private $words;
