@@ -20,7 +20,7 @@ class WordList {
   }
 
   public function get_all_list_names() {
-    $result = $this->db->query("SELECT DISTINCT listname FROM wordlists");
+    $result = $this->db->query("SELECT DISTINCT title FROM wordlists");
     $listnames = [];
     while ($row = $result->fetch_assoc()) {
       $listnames[] = $row['listname'];
