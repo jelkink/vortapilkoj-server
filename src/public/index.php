@@ -1,3 +1,18 @@
+<html>
+  <head>
+    <title>Vortapilkoj Management</title>
+    <link rel="stylesheet" type="text/css" href="vt.css">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Vortapilkoj Management</h1>
+      </header>
+      <nav>
+        <a href="index.php?page=home">Home</a> | <a href="index.php?page=lists">Lists</a> | <a href="index.php?page=words">Words</a></li>
+      </nav>
+      <main>
+
 <?php
 // during development only!
 error_reporting(E_ALL);
@@ -11,34 +26,22 @@ require_once($path_to_library . "class.wordlist.php");
 $db = new Database();
 $db->Connect();
 
-$wl = new WordList($db);
-
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['command']) && $_GET['command'] === 'LIST_NAMES') {
-  $response = [
-    'status' => 'success',
-    'message' => $wl->get_all_list_names()
-  ];
-} elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['command']) && $_GET['command'] === 'LIST') {
-  if (isset($_GET['name'])) {
-    $listName = $_GET['name'];
-    $wl->read_list($listName);
-    $response = [
-      'status' => 'success',
-      'message' => $wl->get_list()
-    ];
+if (isset($_GET["page"])) {
+  $page = htmlspecialchars($_GET["page"]);
+  if (file_exists($path_to_library . "page." . $page . ".php")) {
+    include($path_to_library . "page." . $page . ".php");
   } else {
-    $response = [
-      'status' => 'error',
-      'message' => 'List name not provided'
-    ];
+    echo "<div class=\"error\">ERROR: Page " . $page . " not found!</div>";
   }
 } else {
-  $response = [
-    'status' => 'error',
-    'message' => 'Command not found'
-  ];
+  include($path_to_library . "page.home.php");
 }
-
-header('Content-Type: application/json');
-echo json_encode($response);
 ?>
+
+      </main>
+      <footer>
+        <p>&copy; 2024 <a href="https://www.joselkink.net">Jos Dornschneider-Elkink</a></p>
+      </footer>
+    </div>
+  </body>
+</html>
