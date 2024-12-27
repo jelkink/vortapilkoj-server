@@ -7,7 +7,9 @@ class Database {
   private $conn;
 
   public function __construct() {
-    $credentials = file_get_contents('vortapilkoj_database_credentials.txt');
+    global $path_to_library;
+
+    $credentials = file_get_contents($path_to_library . 'vortapilkoj_database_credentials.txt');
     list($this->host, $this->db_name, $this->username, $this->password) = explode("\n", trim($credentials));
   }
 
