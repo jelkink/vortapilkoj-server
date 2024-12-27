@@ -1,4 +1,4 @@
-<h2>Home</h2>
+<h2>Hejmo</h2>
 
 <?php
 

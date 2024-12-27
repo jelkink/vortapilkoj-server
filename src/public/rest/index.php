@@ -29,13 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['command']) && $_GET['co
   } else {
     $response = [
       'status' => 'error',
-      'message' => 'List name not provided'
+      'message' => 'Listonomo ne disponigita'
     ];
   }
 } else {
   $response = [
     'status' => 'error',
-    'message' => 'Command not found'
+    'message' => 'Ordono ne trovita'
   ];
 }
 

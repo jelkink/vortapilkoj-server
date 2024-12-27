@@ -1,4 +1,4 @@
-<h2>Word lists</h2>
+<h2>Vortlistoj</h2>
 
 <?php
 
@@ -12,4 +12,4 @@ foreach ($wordlists as $list) {
 
 ?>
 
-<br><a href="index.php?page=addlist">Add list</a><br>
+<br><a href="index.php?page=addlist">Aldoni liston</a><br>

@@ -21,7 +21,7 @@ class Database {
       $this->conn = new PDO('mysql:host=' . $this->host . ';dbname=' . $this->db_name, $this->username, $this->password);
       $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     } catch(PDOException $e) {
-      throw new Exception('Connection Error: ' . $e->getMessage());
+      throw new Exception('Konekta eraro: ' . $e->getMessage());
     }
 
     return $this->conn;
@@ -34,7 +34,7 @@ class Database {
       $stmt->execute();
       return $stmt;
     } catch (PDOException $e) {
-      throw new Exception('Query Error: ' . $e->getMessage());
+      throw new Exception('Demanda eraro: ' . $e->getMessage());
     }
   }
 }

@@ -1,15 +1,15 @@
 <html>
   <head>
-    <title>Vortapilkoj Management</title>
+    <title>Administrado de Vortapilkoj</title>
     <link rel="stylesheet" type="text/css" href="vt.css">
   </head>
   <body>
     <div class="container">
       <header>
-        <h1>Vortapilkoj Management</h1>
+        <h1>Administrado de Vortapilkoj</h1>
       </header>
       <nav>
-        <a href="index.php?page=home">Home</a> | <a href="index.php?page=lists">Lists</a> | <a href="index.php?page=words">Words</a></li>
+        <a href="index.php?page=home">Hejmo</a> | <a href="index.php?page=lists">Listoj</a> | <a href="index.php?page=words">Vortoj</a></li>
       </nav>
       <main>
 
@@ -31,7 +31,7 @@ if (isset($_GET["page"])) {
   if (file_exists($path_to_library . "page." . $page . ".php")) {
     include($path_to_library . "page." . $page . ".php");
   } else {
-    echo "<div class=\"error\">ERROR: Page " . $page . " not found!</div>";
+    echo "<div class=\"error\">ERARO: Paĝo " . $page . " ne trovita!</div>";
   }
 } else {
   include($path_to_library . "page.home.php");
