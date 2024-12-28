@@ -16,7 +16,7 @@ $wl = new WordList($db);
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['command']) && $_GET['command'] === 'LIST_NAMES') {
   $response = [
     'status' => 'success',
-    'message' => $wl->get_all_list_names()
+    'message' => $wl->get_all_list_names(json = true)
   ];
 } elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['command']) && $_GET['command'] === 'LIST') {
   if (isset($_GET['name'])) {
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['command']) && $_GET['co
     $wl->read_list($listName);
     $response = [
       'status' => 'success',
-      'message' => $wl->get_list()
+      'message' => $wl->get_list(json = true)
     ];
   } else {
     $response = [
