@@ -2,12 +2,12 @@
 
 <?php
 
-$res = $db->query("SELECT id, title FROM wordlists ORDER BY title");
-$wordlists = $res->fetchAll(PDO::FETCH_ASSOC);
+$wl = new WordList($db);
+$wordlists = $wl->get_all_list_names();
 
 foreach ($wordlists as $list) {
     echo "<a href=\"index.php?page=words&list=" . htmlspecialchars($list['id']) . "\">" 
-         . htmlspecialchars($list['title']) . "</a><br>";
+         . htmlspecialchars($list['title']) . "</a> (" . $list['len'] . " vortoj)<br>";
 }
 
 ?>

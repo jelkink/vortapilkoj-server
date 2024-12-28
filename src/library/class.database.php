@@ -37,5 +37,15 @@ class Database {
       throw new Exception('Demanda eraro: ' . $e->getMessage());
     }
   }
+
+  public function insert_query($sql) {
+    try {
+      $stmt = $this->conn->prepare($sql);
+      $stmt->execute();
+      return $this->conn->lastInsertId();
+    } catch (PDOException $e) {
+      throw new Exception('Demanda eraro: ' . $e->getMessage());
+    }
+  }
 }
 ?>
