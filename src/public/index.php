@@ -9,7 +9,7 @@
         <h1>Administrado de Vortapilkoj</h1>
       </header>
       <nav>
-        <a href="index.php?page=home">hejmo</a> | <a href="index.php?page=lists">listoj</a> | <a href="index.php?page=words">vortoj</a></li>
+        <a href="index.php?page=home">hejmo</a> | <a href="index.php?page=lists">listoj</a></li>
       </nav>
       <main>
 
