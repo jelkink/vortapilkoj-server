@@ -2,12 +2,18 @@
 
 <?php
 
-if (!isset($_GET['list'])) {
+if (!isset($_GET['list']) && !isset($_POST['list'])) {
   echo "<error>Vi devas elekti liston</error>";
 } else {
 
+  if (isset($_POST['list'])) {
+    $listid = $_POST['list'];
+  } else {
+    $listid = $_GET['list'];
+  }
+
   $wl = new WordList($db);
-  $wl->read_list($_GET['list']);
+  $wl->read_list($listid);
 
   $words = $wl->get_list();
 ?>
@@ -29,7 +35,7 @@ if (!isset($_GET['list'])) {
     echo "<td>" . htmlspecialchars($wordpair['language1']) . "</td>";
     echo "<td>" . htmlspecialchars($wordpair['word2']) . "</td>";
     echo "<td>" . htmlspecialchars($wordpair['language2']) . "</td>";
-    echo "<td><a href=\"index.php?page=editword&word=" . htmlspecialchars($wordpair['id']) . "\">Redakti</a></td>";
+    echo "<td><a href=\"index.php?page=editword&word=" . htmlspecialchars($wordpair['id']) . "&list=" . htmlspecialchars($listid) . "\">Redakti</a></td>";
     echo "</tr>";
   }
 }
