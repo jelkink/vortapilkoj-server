@@ -62,7 +62,7 @@ if ($session->user_id() == 1) {
 ?>
       </main>
       <footer>
-        <p>&copy; 2024 <a href="https://www.joselkink.net">Jos Dornschneider-Elkink</a></p>
+        <p>&copy; 2024 <a href="https://www.joselkink.net" target="_blank">Jos Dornschneider-Elkink</a></p>
       </footer>
     </div>
   </body>
