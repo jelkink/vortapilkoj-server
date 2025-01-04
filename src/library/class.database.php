@@ -5,6 +5,7 @@ class Database {
   private $username;
   private $password;
   private $conn;
+  private $queries;
 
   public function __construct() {
     global $path_to_library;
@@ -29,6 +30,9 @@ class Database {
 
   // Send a query to the database
   public function query($sql) {
+
+    $this->queries[] = $sql;
+
     try {
       $stmt = $this->conn->prepare($sql);
       $stmt->execute();
@@ -39,6 +43,9 @@ class Database {
   }
 
   public function insert_query($sql) {
+
+    $this->queries[] = $sql;
+
     try {
       $stmt = $this->conn->prepare($sql);
       $stmt->execute();
@@ -46,6 +53,10 @@ class Database {
     } catch (PDOException $e) {
       throw new Exception('Demanda eraro: ' . $e->getMessage());
     }
+  }
+
+  public function get_queries() {
+    return implode("\n", $this->queries);
   }
 }
 ?>

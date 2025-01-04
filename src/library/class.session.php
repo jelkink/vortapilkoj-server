@@ -29,6 +29,10 @@ class Session {
   public function is_admin() {
     global $db;
 
+    if (!$this->is_logged_in()) {
+      return false;
+    }
+
     $result = $db->query("SELECT admin FROM users WHERE id = " . $this->id);
     $user = $result->fetch(PDO::FETCH_ASSOC);
 
