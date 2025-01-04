@@ -41,7 +41,7 @@ if (isset($_GET["session"])) {
         <h1>Administrado de Vortapilkoj</h1>
       </header>
       <nav>
-        <a href="index.php?page=home&session=<?php echo $sessionid ?>">hejmo</a> | <a href="index.php?page=lists&session=<?php echo $sessionid ?>">listoj</a> | <a href="index.php?page=languages&session=<?php echo $sessionid ?>">lingvoj</a> | <a href="index.php?page=users&session=<?php echo $sessionid ?>">uzantoj</a> | <a href="index.php?page=logout&session=<?php echo $sessionid ?>">eliri</a>
+        <a href="index.php?page=home&session=<?php echo $sessionid ?>">hejmo</a> | <a href="index.php?page=search&session=<?php echo $sessionid; ?>">vortoj</a> | <a href="index.php?page=lists&session=<?php echo $sessionid ?>">listoj</a> | <a href="index.php?page=languages&session=<?php echo $sessionid ?>">lingvoj</a> | <a href="index.php?page=users&session=<?php echo $sessionid ?>">uzantoj</a> | <a href="index.php?page=logout&session=<?php echo $sessionid ?>">eliri</a>
       </nav>
       <main>
 <?php    
