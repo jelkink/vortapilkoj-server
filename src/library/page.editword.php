@@ -1,3 +1,6 @@
+<?php if (!$session->is_logged_in()): ?>
+  <error>Vi devas ensaluti por vidi tiun paĝon</error>
+<?php else: ?>
 
 <?php if (isset($_POST['word1'])): ?>
 
@@ -18,7 +21,7 @@
   $word = $result->fetch(PDO::FETCH_ASSOC);
 ?>
 
-<form action="index.php?page=editword" method="post">
+<form action="index.php?page=editword&session=<?php echo $sessionid ?>" method="post">
   <table>
     <tr valign="top">
       <td>Vorto:</td>
@@ -68,4 +71,5 @@
   </table>
 </form>
 
+<?php endif; ?>
 <?php endif; ?>

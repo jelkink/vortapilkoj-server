@@ -1,17 +1,14 @@
+<?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+?>
+
 <html>
   <head>
     <title>Administrado de Vortapilkoj</title>
     <link rel="stylesheet" type="text/css" href="vt.css">
   </head>
-  <body>
-    <div class="container">
-      <header>
-        <h1>Administrado de Vortapilkoj</h1>
-      </header>
-      <nav>
-        <a href="index.php?page=home">hejmo</a> | <a href="index.php?page=lists">listoj</a> | <a href="index.php?page=languages">lingvoj</a>
-      </nav>
-      <main>
 
 <?php
 // during development only!
@@ -21,11 +18,33 @@ ini_set('display_errors', 1);
 $path_to_library = "../library/";
 
 require_once($path_to_library . "class.database.php");
+require_once($path_to_library . "class.session.php");
 require_once($path_to_library . "class.wordlist.php");
 
 $db = new Database();
 $db->Connect();
 
+$session = new Session();
+
+if (isset($_GET["session"])) {
+  $session->check_id($_GET["session"]);
+  $sessionid = $_GET["session"];
+} else {
+  $sessionid = "";
+}
+?>
+
+
+<body>
+    <div class="container">
+      <header>
+        <h1>Administrado de Vortapilkoj</h1>
+      </header>
+      <nav>
+        <a href="index.php?page=home&session=<?php echo $sessionid ?>">hejmo</a> | <a href="index.php?page=lists&session=<?php echo $sessionid ?>">listoj</a> | <a href="index.php?page=languages&session=<?php echo $sessionid ?>">lingvoj</a>
+      </nav>
+      <main>
+<?php    
 if (isset($_GET["page"])) {
   $page = htmlspecialchars($_GET["page"]);
   if (file_exists($path_to_library . "page." . $page . ".php")) {
@@ -37,7 +56,6 @@ if (isset($_GET["page"])) {
   include($path_to_library . "page.home.php");
 }
 ?>
-
       </main>
       <footer>
         <p>&copy; 2024 <a href="https://www.joselkink.net">Jos Dornschneider-Elkink</a></p>

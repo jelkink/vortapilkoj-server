@@ -13,4 +13,4 @@ echo "</table>";
 
 ?>
 
-<br><a href="index.php?page=addlang">Aldoni lingvon</a><br>
+<br><a href="index.php?page=addlang&session=<?php echo $sessionid ?>">Aldoni lingvon</a><br>

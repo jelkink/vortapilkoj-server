@@ -1,10 +1,13 @@
+<?php if (!$session->is_logged_in()): ?>
+  <error>Vi devas ensaluti por vidi tiun paĝon</error>
+<?php else: ?>
 
 <h2>Aldonu novan liston</h2>
 
 <?php if (isset($_POST['title'])): ?>
   <?php
   $title = htmlspecialchars($_POST['title']);
-  $listid = $db->insert_query("INSERT INTO wordlists (title) VALUES ('" . $title . "')");
+  $listid = $db->insert_query("INSERT INTO wordlists (title, creator) VALUES ('" . $title . "', " . $session->user_id . ")");
 
   $lang1 = $_POST['lang1'];
   $lang2 = $_POST['lang2'];
@@ -26,9 +29,9 @@
       $notes = trim($word[2]);
     }
     if (count($word) == 2) {
-      $wordid = $db->insert_query("INSERT INTO words (word1, language1, word2, language2) VALUES ('" . $word1 . "', " . $lang1 . ", '" . $word2 . "', " . $lang2 . ")");
+      $wordid = $db->insert_query("INSERT INTO words (word1, language1, word2, language2, creator) VALUES ('" . $word1 . "', " . $lang1 . ", '" . $word2 . "', " . $lang2 . ", " . $session->user_id . ")");
     } elseif (count($word) == 3) {
-      $wordid = $db->insert_query("INSERT INTO words (word1, language1, word2, language2, notes) VALUES ('" . $word1 . "', " . $lang1 . ", '" . $word2 . "', " . $lang2 . ", '" . $notes . "')");
+      $wordid = $db->insert_query("INSERT INTO words (word1, language1, word2, language2, notes, creator) VALUES ('" . $word1 . "', " . $lang1 . ", '" . $word2 . "', " . $lang2 . ", '" . $notes . "', " . $session->user_id . ")");
     } else {
       continue;
     }
@@ -40,7 +43,7 @@
 
 <?php else: ?>
 
-<form action="index.php?page=addlist" method="post">
+<form action="index.php?page=addlist&session=<?php echo $sessionid ?>" method="post">
   <table>
     <tr valign="top">
       <td>Titolo de listo:</td>
@@ -87,4 +90,5 @@
   </table>
 </form>
 
+<?php endif; ?>
 <?php endif; ?>

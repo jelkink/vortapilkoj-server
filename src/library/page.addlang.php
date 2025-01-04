@@ -1,4 +1,6 @@
-
+<?php if (!$session->is_logged_in()): ?>
+  <error>Vi devas ensaluti por vidi tiun paĝon</error>
+<?php else: ?>
 
 <?php if (isset($_POST['name'])): ?>
   <?php
@@ -13,7 +15,7 @@
 
 <h2>Aldonu novan lingvon</h2>
 
-<form action="index.php?page=addlang" method="post">
+<form action="index.php?page=addlang&session=<?php echo $sessionid ?>" method="post">
   <table>
     <tr valign="top">
       <td>Lingvo:</td>
@@ -25,4 +27,5 @@
   </table>
 </form>
 
+<?php endif; ?>
 <?php endif; ?>

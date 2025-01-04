@@ -1,3 +1,7 @@
+<?php if (!$session->is_logged_in()): ?>
+  <error>Vi devas ensaluti por vidi tiun paĝon</error>
+<?php else: ?>
+
 <h2>Vortoj</h2>
 
 <?php
@@ -35,7 +39,7 @@ if (!isset($_GET['list']) && !isset($_POST['list'])) {
     echo "<td>" . htmlspecialchars($wordpair['language1']) . "</td>";
     echo "<td>" . htmlspecialchars($wordpair['word2']) . "</td>";
     echo "<td>" . htmlspecialchars($wordpair['language2']) . "</td>";
-    echo "<td><a href=\"index.php?page=editword&word=" . htmlspecialchars($wordpair['id']) . "&list=" . htmlspecialchars($listid) . "\">Redakti</a></td>";
+    echo "<td><a href=\"index.php?page=editword&session=$sessionid&word=" . htmlspecialchars($wordpair['id']) . "&list=" . htmlspecialchars($listid) . "\">Redakti</a></td>";
     echo "</tr>";
   }
 }
@@ -43,3 +47,4 @@ if (!isset($_GET['list']) && !isset($_POST['list'])) {
 ?>
 
 </table>
+<?php endif; ?>
