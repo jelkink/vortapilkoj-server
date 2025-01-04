@@ -56,7 +56,9 @@ if (isset($_GET["page"])) {
   include($path_to_library . "page.home.php");
 }
 
-echo "<br><br><pre>" . $db->get_queries() . "</pre>";
+if ($session->user_id() == 1) {
+  echo "<br><br><pre style='color: lightgray;'>" . $db->get_queries() . "</pre>";
+}
 ?>
       </main>
       <footer>
