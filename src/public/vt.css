@@ -59,6 +59,15 @@ main p {
   margin: 10px 0;
 }
 
+main a {
+  text-decoration: none;
+  color: #007BFF;
+}
+
+main a:hover {
+  text-decoration: underline;
+}
+
 /* Error message */
 .error {
   color: red;
