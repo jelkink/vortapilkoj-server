@@ -1,5 +1,5 @@
-<?php if (!$session->is_logged_in()): ?>
-  <error>Vi devas ensaluti por vidi tiun paĝon</error>
+<?php if (!$session->is_admin()): ?>
+  <error>Vi devas esti administranto por vidi tiun paĝon</error>
 <?php else: ?>
 
 <?php if (isset($_POST['name'])): ?>
