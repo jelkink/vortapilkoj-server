@@ -65,7 +65,13 @@
     </tr>
     <tr>
       <input type="hidden" name="word" value="<?php echo $wordid; ?>">
-      <input type="hidden" name="list" value="<?php echo $_GET['list']; ?>">
+      <?php if (isset($_GET['list'])): ?>
+        <input type="hidden" name="list" value="<?php echo $_GET['list']; ?>">
+      <?php elseif (isset($_GET['language'])): ?>
+        <input type="hidden" name="language" value="<?php echo $_GET['language']; ?>">
+      <?php elseif (isset($_GET['search'])): ?>
+        <input type="hidden" name="search" value="<?php echo $_GET['search']; ?>">
+      <?php endif; ?>
       <td colspan="2"><input type="submit" value="Konservu la vorton"></td>
     </tr>
   </table>

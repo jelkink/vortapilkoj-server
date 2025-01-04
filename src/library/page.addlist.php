@@ -7,7 +7,7 @@
 <?php if (isset($_POST['title'])): ?>
   <?php
   $title = htmlspecialchars($_POST['title']);
-  $listid = $db->insert_query("INSERT INTO wordlists (title, creator) VALUES ('" . $title . "', " . $session->user_id . ")");
+  $listid = $db->insert_query("INSERT INTO wordlists (title, creator) VALUES ('" . $title . "', " . $session->user_id() . ")");
 
   $lang1 = $_POST['lang1'];
   $lang2 = $_POST['lang2'];
@@ -29,7 +29,7 @@
       $notes = trim($word[2]);
     }
     if (count($word) == 2) {
-      $wordid = $db->insert_query("INSERT INTO words (word1, language1, word2, language2, creator) VALUES ('" . $word1 . "', " . $lang1 . ", '" . $word2 . "', " . $lang2 . ", " . $session->user_id . ")");
+      $wordid = $db->insert_query("INSERT INTO words (word1, language1, word2, language2, creator) VALUES ('" . $word1 . "', " . $lang1 . ", '" . $word2 . "', " . $lang2 . ", " . $session->user_id() . ")");
     } elseif (count($word) == 3) {
       $wordid = $db->insert_query("INSERT INTO words (word1, language1, word2, language2, notes, creator) VALUES ('" . $word1 . "', " . $lang1 . ", '" . $word2 . "', " . $lang2 . ", '" . $notes . "', " . $session->user_id . ")");
     } else {
