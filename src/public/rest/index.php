@@ -1,5 +1,5 @@
 <?php
-// during development only!
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
@@ -7,38 +7,42 @@ $path_to_library = "../library/";
 
 require_once($path_to_library . "class.database.php");
 require_once($path_to_library . "class.wordlist.php");
+require_once($path_to_library . "class.processor.php");
 
 $db = new Database();
 $db->Connect();
 
-$wl = new WordList($db);
+$pr = new Processor();
 
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['command']) && $_GET['command'] === 'LIST_NAMES') {
-  $response = [
-    'status' => 'success',
-    'message' => $wl->get_all_list_names(json = true)
-  ];
-} elseif ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['command']) && $_GET['command'] === 'LIST') {
-  if (isset($_GET['name'])) {
-    $listName = $_GET['name'];
-    $wl->read_list($listName);
-    $response = [
-      'status' => 'success',
-      'message' => $wl->get_list(json = true)
-    ];
+$result = [
+  'status' => 'error',
+  'message' => 'Neniu respondo trovita',
+  'request' => $_REQUEST
+];
+
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+  if (isset($_GET['command'])) {
+    $response = $pr->process($_GET['command'], $_GET);
   } else {
     $response = [
       'status' => 'error',
-      'message' => 'Listonomo ne disponigita'
+      'message' => 'Ordono ne trovita',
+      'request' => $_GET
     ];
   }
 } else {
-  $response = [
-    'status' => 'error',
-    'message' => 'Ordono ne trovita'
-  ];
+  if (isset($_POST['command'])) {
+    $response = $pr->process($_POST['command'], $_POST);
+  } else {
+    $response = [
+      'status' => 'error',
+      'message' => 'Ordono ne trovita',
+      'request' => $_POST
+    ];
+  }
 }
 
 header('Content-Type: application/json');
 echo json_encode($response);
+
 ?>
