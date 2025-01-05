@@ -10,7 +10,10 @@ echo "<tr><th>Titolo</th><th>Vortoj</th><th></th></tr>";
 
 foreach ($wordlists as $list) {
     echo "<tr><td><a href=\"index.php?page=words&session=$sessionid&list=" . htmlspecialchars($list['id']) . "\">" 
-         . htmlspecialchars($list['title']) . "</a></td><td>" . $list['len'] . "</td><td><a href=\"index.php?page=quiz&session=$sessionid&list=" . htmlspecialchars($list['id']) . "\">Kvizo</a></tr>";
+         . htmlspecialchars($list['title']) . "</a></td><td>" . $list['len'] . "</td>"
+         . "<td><a href=\"index.php?page=deletelist&session=$sessionid&list=" . htmlspecialchars($list['id']) . "\">Forigis</a>"
+         . "<td><a href=\"index.php?page=quiz&session=$sessionid&list=" . htmlspecialchars($list['id']) . "\">Kvizo</a>"
+         . "</tr>";
 }
 
 echo "</table>";
