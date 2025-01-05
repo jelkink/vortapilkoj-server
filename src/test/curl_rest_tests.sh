@@ -1,0 +1,2 @@
+curl -v -G --data-urlencode "command=LIST_NAMES" http://www.joselkink.net/vt/rest/index.php
+curl -v -G --data-urlencode "command=LIST" --data-urlencode "list=9" http://www.joselkink.net/vt/rest/index.php
