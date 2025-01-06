@@ -38,7 +38,6 @@ class Quiz {
       }
     }
 
-    // Shuffle the options
     shuffle($options);
 
     echo "<p>" . htmlspecialchars($correctWordPair['word1']) . "</p>";
@@ -64,22 +63,25 @@ class Quiz {
       }
     }
 
-    // Find the correct translation
-    $correctTranslation = '';
+    $this->total++;
+
+    $correctTranslation = [];
+    $correct = false;
     foreach ($this->words as $wordPair) {
       if ($wordPair['word1'] === $testWord) {
-        $correctTranslation = $wordPair['word2'];
-        break;
+        $correctTranslation[] = $wordPair['word2'];
+
+        if ($wordPair['word2'] === $selectedWord) {
+          echo "<p>Ĝuste!</p>";
+          $this->correct++;
+          $correct = true;
+          break;
+        }  
       }
     }
 
-    // Check if the selected word is correct
-    $this->total++;
-    if ($selectedWord === $correctTranslation) {
-      echo "<p>Ĝuste!</p>";
-      $this->correct++;
-    } else {
-      echo "<p>Malĝuste. La ĝusta traduko de " . $testWord . " estas " . htmlspecialchars($correctTranslation) . ".</p>";
+    if (!$correct) {
+      echo "<p>Malĝuste. La ĝusta traduko de <i>" . $testWord . "</i> estas <i>" . implode("</i> aŭ <i>", $correctTranslation) . "</i>.</p>";
     }
   }
 
