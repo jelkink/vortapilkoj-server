@@ -41,7 +41,10 @@ class Quiz {
     shuffle($options);
 
     echo "<p>" . htmlspecialchars($correctWordPair['word1']) . "</p>";
-    echo "<form method=\"post\" action=\"index.php?page=quiz&session=$sessionid&list=$list\">";
+    echo "<form method=\"post\" action=\"index.php?page=quiz&session=$sessionid\">";
+    foreach ($list as $l) {
+      echo "<input type=\"hidden\" name=\"list[]\" value=\"" . htmlspecialchars($l) . "\">";
+    }
     echo "<input type=\"hidden\" name=\"test\" value=\"" . htmlspecialchars($correctWordPair['word1']) . "\">";
     echo "<input type=\"hidden\" name=\"total\" value=\"" . $this->total . "\">";
     echo "<input type=\"hidden\" name=\"correct\" value=\"" . $this->correct . "\">";

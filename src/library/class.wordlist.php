@@ -6,11 +6,15 @@ class WordList {
     $this->words = [];
   }
 
+  public function clear_list() {
+    $this->words = [];
+  }
+
   public function read_list($list) {
     global $db;
 
     $result = $db->query("SELECT id,word1,language1,word2,language2 FROM wordmapping LEFT JOIN words ON wordmapping.word = words.id WHERE wordmapping.list = " . $list . " ORDER BY word1, word2");
-    $this->words = $result->fetchAll(PDO::FETCH_ASSOC);
+    $this->words = array_merge($this->words, $result->fetchAll(PDO::FETCH_ASSOC));
   }
 
   public function read_list_by_language($language) {
@@ -46,6 +50,14 @@ class WordList {
     } else {
       return $listnames;
     }
+  }
+
+  public function delete_list($list) {
+    global $db;
+    
+    $db->query("DELETE FROM wordmapping WHERE list = $list");
+    $db->query("DELETE w FROM words w LEFT JOIN wordmapping wm ON w.id = wm.word WHERE wm.list IS NULL");
+    $db->query("DELETE FROM wordlists WHERE id = $list");
   }
 }
 

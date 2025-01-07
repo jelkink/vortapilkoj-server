@@ -14,8 +14,11 @@ if (!isset($_GET['list']) && !isset($_POST['list'])) {
 
   $wl = new WordList($db);
 
-  $listid = isset($_POST['list']) ? $_POST['list'] : $_GET['list'];
-  $wl->read_list($listid);
+  $selectedLists = $_POST['list'];
+
+  for ($i = 0; $i < count($selectedLists); $i++) {
+    $wl->read_list($selectedLists[$i]);
+  }
 
   $words = $wl->get_list();
 
@@ -27,7 +30,7 @@ if (!isset($_GET['list']) && !isset($_POST['list'])) {
     $quiz->show_results();
   } 
   
-  $quiz->show_quiz($listid);
+  $quiz->show_quiz($selectedLists);
 }
 
 ?>
