@@ -14,6 +14,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif (isset($_POST['quiz']) && !empty($_POST['list'])) {
       include($path_to_library . "page.quiz.php");
       $showLists = false;
+    } elseif (isset($_POST['test']) && !empty($_POST['list'])) {
+      include($path_to_library . "page.test.php");
+      $showLists = false;
     }
   }
 }
@@ -39,6 +42,7 @@ if ($showLists) {
   echo "</table><br>";
   echo "<input type=\"submit\" name=\"delete\" value=\"Forigi listojn\">";
   echo "<input type=\"submit\" name=\"quiz\" value=\"Krei kvizon\">";
+  echo "<input type=\"submit\" name=\"test\" value=\"Krei teston\">";
   echo "</form>";
 
   echo "<br><a href=\"index.php?page=addlist&session=$sessionid \">Aldoni liston</a><br>";

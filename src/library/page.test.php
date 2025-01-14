@@ -2,7 +2,7 @@
   <error>Vi devas ensaluti por vidi tiun paĝon</error>
 <?php else: ?>
   
-<h2>Kvizo</h2>
+<h2>Testo</h2>
 
 <?php
 
@@ -24,15 +24,14 @@ if (!isset($_GET['list']) && !isset($_POST['list'])) {
 
   $quiz = new Quiz($words);
 
-  if (isset($_POST['test'])) {
-    $quiz->grade_quiz($_POST);
+  if (isset($_POST['answer'])) {
+    $quiz->grade_test($_POST);
     $quiz->show_results();
   } 
   
-  $quiz->show_quiz($selectedLists);
+  $quiz->show_test($selectedLists);
 }
 
 ?>
 
 <? endif; ?>
-

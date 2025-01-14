@@ -9,17 +9,13 @@ class Quiz {
   public function __construct($words) {
     $this->words = $words;
 
-    if (isset($_POST['test'])) {
+    if (isset($_POST['total']) && isset($_POST['correct'])) {
       $this->total = $_POST['total'];
       $this->correct = $_POST['correct'];
     } else {
       $this->total = 0;
       $this->correct = 0;
     }
-  }
-
-  public function shuffle_words() {
-    shuffle($this->words);
   }
 
   public function show_quiz($list) {
@@ -54,6 +50,26 @@ class Quiz {
     echo "</form>";
   }
 
+  public function show_test($list) {
+
+    global $sessionid;
+
+    $randomIndex = array_rand($this->words);
+    $correctWordPair = $this->words[$randomIndex];
+    
+    echo "<p>" . htmlspecialchars($correctWordPair['word1']) . "</p>";
+    echo "<form method=\"post\" action=\"index.php?page=test&session=$sessionid\">";
+    foreach ($list as $l) {
+      echo "<input type=\"hidden\" name=\"list[]\" value=\"" . htmlspecialchars($l) . "\">";
+    }
+    echo "<input type=\"hidden\" name=\"test\" value=\"" . htmlspecialchars($correctWordPair['word1']) . "\">";
+    echo "<input type=\"hidden\" name=\"total\" value=\"" . $this->total . "\">";
+    echo "<input type=\"hidden\" name=\"correct\" value=\"" . $this->correct . "\">";
+    echo "<input type=\"text\" name=\"answer\" autofocus>";
+    echo "<input type=\"submit\" value=\"Kontroli\">";
+    echo "</form>";
+  }
+
   public function grade_quiz($post) {
     $testWord = $post['test'];
     $selectedWord = '';
@@ -85,6 +101,33 @@ class Quiz {
 
     if (!$correct) {
       echo "<p>Malĝuste. La ĝusta traduko de <i>" . $testWord . "</i> estas <i>" . implode("</i> aŭ <i>", $correctTranslation) . "</i>.</p>";
+    }
+  }
+
+  public function grade_test($post) {
+    $testWord = $post['test'];
+    $answer = $post['answer'];
+
+    $this->total++;
+
+    $correctTranslation = [];
+    $correct = false;
+    foreach ($this->words as $wordPair) {
+      if ($wordPair['word1'] === $testWord) {
+        $correctTranslation[] = $wordPair['word2'];
+
+        if (strtolower(preg_replace("/[[:punct:]]+/", "", $wordPair['word2'])) === strtolower(preg_replace("/[[:punct:]]+/", "", $answer))) {
+          echo "<p>Ĝuste!</p>";
+          $this->correct++;
+          $correct = true;
+          break;
+        }  
+      }
+    }
+
+    if (!$correct) {
+      echo "<p>Malĝuste. La ĝusta traduko de <i>" . $testWord . "</i> estas <i>" . implode("</i> aŭ <i>", $correctTranslation) . "</i>.</p>";
+      echo "<p>Vi respondis <i>" . $answer . "</i>.</p>";
     }
   }
 
