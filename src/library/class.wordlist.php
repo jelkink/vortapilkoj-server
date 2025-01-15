@@ -13,8 +13,12 @@ class WordList {
   public function read_list($list) {
     global $db;
 
-    $result = $db->query("SELECT id,word1,language1,word2,language2 FROM wordmapping LEFT JOIN words ON wordmapping.word = words.id WHERE wordmapping.list = " . $list . " ORDER BY word1, word2");
-    $this->words = array_merge($this->words, $result->fetchAll(PDO::FETCH_ASSOC));
+    if (isset($_POST["reverse"]) && $_POST["reverse"] == 1) {
+      $result = $db->query("SELECT id,word1 AS word2,language1 AS language2,word2 AS word1,language2 AS language1 FROM wordmapping LEFT JOIN words ON wordmapping.word = words.id WHERE wordmapping.list = " . $list . " ORDER BY word1, word2");
+    } else {
+      $result = $db->query("SELECT id,word1,language1,word2,language2 FROM wordmapping LEFT JOIN words ON wordmapping.word = words.id WHERE wordmapping.list = " . $list . " ORDER BY word1, word2");
+    }
+      $this->words = array_merge($this->words, $result->fetchAll(PDO::FETCH_ASSOC));
   }
 
   public function read_list_by_language($language) {

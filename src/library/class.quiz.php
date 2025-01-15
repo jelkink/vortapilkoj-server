@@ -54,6 +54,8 @@ class Quiz {
 
     global $sessionid;
 
+    $reverse = isset($_POST['reverse']) && $_POST['reverse'] == 1;
+
     $randomIndex = array_rand($this->words);
     $correctWordPair = $this->words[$randomIndex];
     
@@ -65,7 +67,8 @@ class Quiz {
     echo "<input type=\"hidden\" name=\"test\" value=\"" . htmlspecialchars($correctWordPair['word1']) . "\">";
     echo "<input type=\"hidden\" name=\"total\" value=\"" . $this->total . "\">";
     echo "<input type=\"hidden\" name=\"correct\" value=\"" . $this->correct . "\">";
-    echo "<input type=\"text\" name=\"answer\" autofocus>";
+    echo "<input type=\"text\" name=\"answer\" autofocus><br>";
+    echo "<input type=\"checkbox\" name=\"reverse\" value=\"1\" " . ($reverse ? "checked" : "") . ">Inversigi<br>";
     echo "<input type=\"submit\" value=\"Kontroli\">";
     echo "</form>";
   }
