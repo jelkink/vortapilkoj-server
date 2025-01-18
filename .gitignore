@@ -1,4 +1,4 @@
 vortapilkoj_database_credentials.txt
 
-composer.*
+composer.lock
 vendor/
