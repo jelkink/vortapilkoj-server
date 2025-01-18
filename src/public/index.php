@@ -57,7 +57,7 @@ if (isset($_GET["page"])) {
 }
 
 if ($session->user_id() == 1) {
-  echo "<br><br><pre style='color: lightgray;'>" . $db->get_queries() . "</pre>";
+  echo "<br><br><pre style='color: lightgray; white-space: pre-wrap;'>" . $db->get_queries() . "</pre>";
 }
 ?>
       </main>
