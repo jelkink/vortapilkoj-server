@@ -1,5 +1,7 @@
 <?php
 
+use Overtrue\Pinyin\Pinyin;
+
 class Quiz {
 
   private $words;
@@ -129,6 +131,12 @@ class Quiz {
     }
 
     if (!$correct) {
+      for ($i = 0; $i < count($correctTranslation); $i++) {
+        if (preg_match("/\p{Han}+/u", $correctTranslation[$i])) {
+          $pinyin = new Pinyin();
+          $correctTranslation[$i] = $correctTranslation[$i] . " (" . $pinyin->sentence($correctTranslation[$i]) . ")";
+        }
+      }
       echo "<p>Malĝuste. La ĝusta traduko de <i>" . $testWord . "</i> estas <i>" . implode("</i> aŭ <i>", $correctTranslation) . "</i>.</p>";
       echo "<p>Vi respondis <i>" . $answer . "</i>.</p>";
     }

@@ -17,6 +17,8 @@ ini_set('display_errors', 1);
 
 $path_to_library = "../library/";
 
+require_once($path_to_library . "vendor/autoload.php");
+
 require_once($path_to_library . "class.database.php");
 require_once($path_to_library . "class.session.php");
 require_once($path_to_library . "class.wordlist.php");
