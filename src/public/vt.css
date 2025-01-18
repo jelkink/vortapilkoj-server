@@ -68,6 +68,14 @@ main a:hover {
   text-decoration: underline;
 }
 
+.test {
+  font-size: 5em;
+}
+
+.answer {
+  font-size: 5em;
+}
+
 /* Error message */
 .error {
   color: red;

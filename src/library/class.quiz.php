@@ -36,7 +36,7 @@ class Quiz {
 
     shuffle($options);
 
-    echo "<p>" . htmlspecialchars($correctWordPair['word1']) . "</p>";
+    echo "<p><div class=\"test\">" . htmlspecialchars($correctWordPair['word1']) . "</div></p>";
     echo "<form method=\"post\" action=\"index.php?page=quiz&session=$sessionid\">";
     foreach ($list as $l) {
       echo "<input type=\"hidden\" name=\"list[]\" value=\"" . htmlspecialchars($l) . "\">";
@@ -59,7 +59,7 @@ class Quiz {
     $randomIndex = array_rand($this->words);
     $correctWordPair = $this->words[$randomIndex];
     
-    echo "<p>" . htmlspecialchars($correctWordPair['word1']) . "</p>";
+    echo "<p><div class=\"test\">" . htmlspecialchars($correctWordPair['word1']) . "</div></p>";
     echo "<form method=\"post\" action=\"index.php?page=test&session=$sessionid\">";
     foreach ($list as $l) {
       echo "<input type=\"hidden\" name=\"list[]\" value=\"" . htmlspecialchars($l) . "\">";
@@ -67,9 +67,9 @@ class Quiz {
     echo "<input type=\"hidden\" name=\"test\" value=\"" . htmlspecialchars($correctWordPair['word1']) . "\">";
     echo "<input type=\"hidden\" name=\"total\" value=\"" . $this->total . "\">";
     echo "<input type=\"hidden\" name=\"correct\" value=\"" . $this->correct . "\">";
-    echo "<input type=\"text\" name=\"answer\" autofocus><br>";
-    echo "<input type=\"checkbox\" name=\"reverse\" value=\"1\" " . ($reverse ? "checked" : "") . ">Inversigi<br>";
-    echo "<input type=\"submit\" value=\"Kontroli\">";
+    echo "<p><div class=\"answer\"><input type=\"text\" name=\"answer\" autofocus autocomplete=\"off\"></div></p>";
+    echo "<p><input type=\"submit\" value=\"Kontroli\">";
+    echo "<input type=\"checkbox\" name=\"reverse\" value=\"1\" " . ($reverse ? "checked" : "") . ">Inversigi</p>";
     echo "</form>";
   }
 
